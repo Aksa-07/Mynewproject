@@ -1,19 +1,121 @@
+/* Gradient background */
 .gradient-background {
-    background: linear-gradient(300deg, #00bfff, #ff4c68, #ef8172);
+  background-image: linear-gradient(to right, #141e30, #243b55);
+  height: 100%;
+  width: 100%;
+  animation: gradient-animation 18s ease infinite;
+}
 
-    height: 100%;
-    width: 100%;
-    animation: gradient-animation 18s ease infinite;
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
   }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
-  @keyframes gradient-animation {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
+/* Custom heading and paragraph */
+.custom-heading, .custom-paragraph {
+  color: whitesmoke;
+}
+
+/* External CSS for navigation links */
+.nav-link {
+  color: black; /* Default text color */
+  text-decoration: none; /* Remove underline */
+  padding: 0 1rem; /* Consistent padding */
+  font-size: 1.3rem; /* Consistent text size */
+  display: inline-block; /* Ensure padding is applied properly */
+  text-align: center; /* Center text alignment */
+}
+
+.nav-link:hover {
+  color: #c563ff; /* Color on hover */
+}
+
+/* Ensure the list items are displayed horizontally and aligned */
+.nav {
+  list-style-type: none; /* Remove default list bullets */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  display: flex; /* Display list items in a row */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Vertically align items in the center */
+}
+
+/* Additional margin to push links to the right of the icon */
+.nav li:first-child {
+  margin-right: 2rem; /* Adjust the margin to push the links further right */
+}
+
+
+.nav li {
+  margin: 0 0.15rem; /* Add horizontal margin between items */
+  display: flex; /* Ensure the list item is a flex container */
+  align-items: center; /* Center the content vertically within the list item */
+}
+
+.nav-item {
+  display: flex; /* Make sure the image container aligns properly */
+  align-items: center; /* Center the content vertically */
+}
+
+
+/* Common styles for all buttons */
+.btn {
+  padding: 10px 20px; /* Adjust padding */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease; /* Smooth transition for hover */
+  border: none; /* Default to no border */
+  color: #fff; /* Default text color for buttons */
+}
+
+.btn:hover {
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+/* Specific styles for "Login" button */
+.btn-login {
+  border: 1px solid #333; /* Dark border */
+  background-color: transparent; /* Transparent background */
+  color:#333;
+}
+
+.btn-login:hover {
+  background-color: #333; /* Dark background on hover */
+  color: #fff; /* White text on hover */
+}
+
+/* Specific styles for "Sign-up" button */
+.btn-signup {
+  background-color: #ffc107; /* Yellow background */
+}
+
+.btn-signup:hover {
+  background-color: #e0a800; /* Darker yellow on hover */
+}
+
+/* Specific styles for "Primary" button */
+.btn-primary {
+  background-color: #007bff; /* Blue background */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Specific styles for "Contact Us" button */
+.btn-outline-secondary {
+  border: 1px solid #6c757d; /* Gray border */
+  color: #6c757d; /* Gray text */
+  background-color: transparent; /* Transparent background */
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d; /* Gray background on hover */
+  color: #fff; /* White text on hover */
+}
