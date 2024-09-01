@@ -11,8 +11,8 @@
 
 /* Gradient background */
 .gradient-background {
-  background-image: linear-gradient(to right, #141e30, #243b55);
-  height: 50%; 
+  /* background-image: linear-gradient(to right, #141e30, #243b55); */
+  background-image:linear-gradient(to right, #FFFFFF 10%, #F7F5F9 50%, #E4D6F5 90%)  ;
   width: 100%;
   padding:0;
   animation: gradient-animation 18s ease infinite;
@@ -32,9 +32,9 @@
 } 
 
 /* Custom heading and paragraph */
-.custom-heading, .custom-paragraph {
+/* .custom-heading, .custom-paragraph {
   color: whitesmoke;
-}
+} */
 
 /* External CSS for navigation links */
 .nav-link {
@@ -429,7 +429,7 @@
 
 /* About Us Section */
 #about-us {
-  background-color: whitesmoke; 
+  background-image: linear-gradient(to right, #F7F7F7 10%, #E5E5E5 50%, #CCCCCC 90%);
 }
 
 #about-us h2 {
