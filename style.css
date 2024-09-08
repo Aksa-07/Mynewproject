@@ -505,3 +505,118 @@
 }
 
 
+
+
+
+
+
+
+
+/* Style for the modal */
+.modal-content {
+  border-radius: 0.5rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.btn-close {
+  font-size: 1.25rem;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  border-top: 1px solid #dee2e6;
+}
+
+/* Adjust button styles if needed */
+.btn-login {
+  background-color: #007bff;
+  color: #fff;
+}
+.btn-login:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+/*body {
+  background-color: #f8f9fa; /* Light background color 
+}*/
+
+.signup-section {
+  background-color: #ffffff; /* White background for form */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 40px; /* Padding around the form */
+}
+
+.signup-section h2 {
+  color: #343a40; /* Darker text color for the title */
+}
+
+.signup-section .form-label {
+  color: #495057; /* Darker text color for labels */
+}
+
+.signup-section .btn {
+  background-color: #007bff; /* Bootstrap primary color */
+  border: none; /* No border for button */
+}
+
+.signup-section .btn:hover {
+  background-color: #0056b3; /* Darker on hover */
+}
+
+.signup-section p {
+  color: #6c757d; /* Lighter text color for links */
+}
+
+
+/* sign-up.html*/
+body {
+  background-color: #f8f9fa; /* Light background color */
+}
+
+.signup-section {
+  background-color: #ffffff; /* White background for form */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 40px; /* Padding around the form */
+}
+
+.signup-section h2 {
+  color: #343a40; /* Darker text color for the title */
+}
+
+.signup-section .form-label {
+  color: #495057; /* Darker text color for labels */
+}
+
+.signup-section .btn {
+  background-color: #007bff; /* Bootstrap primary color */
+  border: none; /* No border for button */
+}
+
+.signup-section .btn:hover {
+  background-color: #0056b3; /* Darker on hover */
+}
+
+.signup-section p {
+  color: #6c757d; /* Lighter text color for links */
+}
+
+
+/* login.html*/

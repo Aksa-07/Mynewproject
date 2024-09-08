@@ -32,12 +32,114 @@
                   <input type="search" class="form-control form-control-light text-bg-light" placeholder="Search..." aria-label="Search">
                 </form>
                 <div class="text-end">
-                  <button type="button" class="btn btn-login me-2">Login</button>
-                  <button type="button" class="btn btn-signup">Sign-up</button>
+                  <button type="button" class="btn btn-login me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                  <!--<button type="button" class="btn btn-signup">Sign-up</button>-->
+                  <button type="button" class="btn btn-signup" data-bs-toggle="modal" data-bs-target="#signupModal">Sign-up</button>
+                  
+
                 </div>
               </div>
             </div>
           </header>
+
+     
+
+          <!-- Your existing content -->
+
+    <!-- Login Button -->
+    <!--<button type="button" class="btn btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>-->
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Bootstrap JS (needed for modal functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+<!-- Existing HTML content -->
+
+<!-- Sign-up Modal -->
+ 
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="mb-3">
+                      <label for="name" class="form-label">Full Name</label>
+                      <input type="text" class="form-control" id="name" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="email" class="form-label">Email Address</label>
+                      <input type="email" class="form-control" id="email" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="phone" class="form-label">Phone Number</label>
+                      <input type="tel" class="form-control" id="phone" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="address" class="form-label">Address</label>
+                      <input type="text" class="form-control" id="address" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="password" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="confirm-password" class="form-label">Confirm Password</label>
+                      <input type="password" class="form-control" id="confirm-password" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Existing HTML content -->
+
+<!-- Bootstrap JavaScript Bundle -->
+ 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
 
           <div class="px-4 pt-5 my-5 text-center border-bottom">
             <h1 class="display-4 fw-bold custom-heading">Men's Custom Fit</h1> <!-- Apply the custom class here -->
