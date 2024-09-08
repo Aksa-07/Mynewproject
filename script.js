@@ -35,3 +35,5 @@ function animateSlider() {
         'margin-left': newMarginLeft
     }, 500);
 }
+
+

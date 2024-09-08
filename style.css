@@ -257,12 +257,12 @@
 }
  
 .buy-now-btn:after {
-  content: 'Buy Now';
+  content: 'Choose Fabric & Stitch';
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
   position: absolute;
-  right: 35px;
+  /* right: 35px; */
   top: 18px;
 }
  
@@ -503,11 +503,5 @@
 .footer ul li i {
   margin-right: 0.5rem;
 }
-
-
-
-
-
-
 
 

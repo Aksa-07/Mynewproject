@@ -1,0 +1,65 @@
+.image-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent images from wrapping to new lines */
+    padding: 10px; /* Add some padding for better visuals */
+  }
+  
+  .image-container img {
+    width: 100px; /* Set a consistent width for all images */
+    height: 200px; /* Set a consistent height for all images */
+    border-radius: 10px; /* Add curved corners to images */
+    margin: 10px; /* Add some margin for better visuals */
+    display: inline-block; /* Make images display inline */
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .image.selected {
+    border: 5px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  /* Make the design responsive */
+  @media only screen and (max-width: 768px) {
+    .image-container img {
+      width: 150px; /* Reduce image size for smaller screens */
+      height: 150px; /* Reduce image size for smaller screens */
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .image-container img {
+      width: 100px; /* Reduce image size for even smaller screens */
+      height: 100px; /* Reduce image size for even smaller screens */
+    }
+  }
+
+  h1 {
+    padding: 10px; /* keep the padding the same */
+    margin-bottom: 0; /* remove the margin below the headings */
+  }
+  .image-container {
+    margin-bottom: 10px; /* add some margin below the image containers */
+  }
+  
+  .done-btn {
+    display: block; /* make the button a block element */
+    margin: 20px auto; /* add some margin above and below the button, and center it */
+    padding: 10px 20px; /* add some padding to the button */
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+    float: right;
+    margin-right: 20px;
+  }
+  
+  .done-btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  .highlighted {
+    border: 3px solid palegreen !important;
+    box-shadow: 0px 4px 15px rgba(0, 128, 0, 0.4);
+  }
