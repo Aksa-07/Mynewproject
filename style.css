@@ -620,3 +620,30 @@ body {
 
 
 /* login.html*/
+.alert {
+  padding: 15px;
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 16px; /* Decent font size */
+  text-align: center; /* Center the text */
+  font-family: Arial, sans-serif; /* Clean font */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a light shadow */
+  display: none; /* Hide by default */
+}
+
+.alert.show {
+  display: block; /* Show the alert */
+}
+
+.alert.success {
+  background-color: #4CAF50; /* Green for success */
+}
+
+.alert.error {
+  background-color: #f44336; /* Red for error */
+}
+
