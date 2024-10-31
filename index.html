@@ -48,7 +48,7 @@
 
     <!-- Login Button -->
     <!--<button type="button" class="btn btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>-->
-
+    <div id="toast" style="position: fixed; top: 20px; right: 20px; z-index: 1050;"></div>
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -64,7 +64,7 @@
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                <input type="password" class="form-control" id="login-password" placeholder="Enter your password" required>
               </div>
               <button type="submit" class="btn btn-primary" id="Login">Login</button>
             </form>
@@ -78,15 +78,18 @@
     
     <!-- Firebase and Bootstrap Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js"></script>
-    <script src="login.js"></script>
+   <!-- Firebase Configuration -->
+<script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+
+    <script type="module" src="OnlineTailor.js"></script>
     
 
 <!-- Existing HTML content -->
 
 <!-- Sign-up Modal -->
- 
+<div id="toast" style="position: fixed; top: 20px; right: 20px; z-index: 1050;"></div>
 <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -96,7 +99,6 @@
           </div>
           <div class="modal-body">
               <form action="" id="Signup">
-                <div class="alert success">Successfully Signed Up!</div>
                   <div class="mb-3">
                       <label for="name" class="form-label">Full Name</label>
                       <input type="text" class="form-control" id="name" required>
@@ -115,11 +117,11 @@
                   </div>
                   <div class="mb-3">
                       <label for="password" class="form-label">Password</label>
-                      <input type="password"  class="form-control" id="password" required>
+                      <input type="password"  class="form-control" id="signup-password" required>
                   </div>
                   <div class="mb-3">
                       <label for="confirm-password" class="form-label">Confirm Password</label>
-                      <input type="password" class="form-control" id="confirm-password" required>
+                      <input type="password" class="form-control" id="signupconfirm-password" required>
                   </div>
                   <button type="submit" class="btn btn-primary w-100">Sign Up</button>
               </form>
@@ -136,8 +138,12 @@
 <!-- Bootstrap JavaScript Bundle -->
  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1/firebase.js"></script>
-<script src="SignupForm.js"></script>
+<!-- Firebase Configuration -->
+<script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+<script type="module" src="OnlineTailor.js"></script>
+    
 
 
 
@@ -304,7 +310,9 @@
 
       
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="script.js"></script>
+      
 
 </body>
 </html>
