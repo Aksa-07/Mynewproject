@@ -5,20 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kurta-Pyjama</title>
     <link rel="stylesheet" href="button.css"> <!-- assuming you have a style.css file -->
+    
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+  
+      .slider {
+        position: relative;
+        width: 80%;
+        max-width: 600px;
+        margin: auto;
+        overflow: hidden;
+      }
+  
+      .slider-wrapper {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+  
+      .slide {
+        min-width: 100%;
+        position: relative;
+        text-align: center;
+      }
+  
+      .slide img {
+        width: 100%;
+      }
+  
+      .spec {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        color: white;
+        background: rgba(0, 0, 0, 0.5);
+        font-size: 1.2em;
+        padding: 10px;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+  
+      .active .spec {
+        opacity: 1;
+      }
+  
+      .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        font-size: 2em;
+        cursor: pointer;
+        padding: 10px;
+      }
+  
+      .left {
+        left: 0;
+      }
+  
+      .right {
+        right: 0;
+      }
+    </style>
+
+
 </head>
 <body>
-    <!-- content will go here -->
-    <h1 style="text-align:center; font-family:Arial, Helvetica, sans-serif;">Kurta-Pyjama</h1>
-    <div class="image-container top-div">
-      <img src="image1.jpg" class="image" id="top-img1">
-      <img src="image1.jpg" class="image" id="top-img2">
-      <img src="image1.jpg" class="image" id="top-img3">
-      <img src="image1.jpg" class="image" id="top-img4">
-      <img src="image1.jpg" class="image" id="top-img5">
-      <img src="image1.jpg" class="image" id="top-img6">
+  <div class="slider">
+    <div class="slider-wrapper">
+      <div class="slide" data-spec="Specification 1">
+        <img src="image1.jpg" alt="Image 1">
+        <div class="spec">Specification 1</div>
+      </div>
+      <div class="slide" data-spec="Specification 2">
+        <img src="image2.jpg" alt="Image 2">
+        <div class="spec">Specification 2</div>
+      </div>
+      <div class="slide" data-spec="Specification 3">
+        <img src="image3.jpg" alt="Image 3">
+        <div class="spec">Specification 3</div>
+      </div>
     </div>
-      
-      <button class="done-btn">Done</button>
-    <script src="button.js"></script> <!-- assuming you have a script.js file -->
+    <button class="arrow left" onclick="prevSlide()">&#10094;</button>
+    <button class="arrow right" onclick="nextSlide()">&#10095;</button>
+  </div>
+  
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+  
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        slide.style.transform = `translateX(-${index * 100}%)`;
+      });
+      slides[index].classList.add('active');
+    }
+  
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }
+  
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(currentSlide);
+    }
+  
+    // Initialize the slider
+    showSlide(currentSlide);
+  </script>
 </body>
 </html>
