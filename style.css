@@ -143,6 +143,7 @@
   height:100vh ;
   overflow-y: hidden;
   box-sizing: border-box;/* Add this to ensure full height */
+  
 }
 
 

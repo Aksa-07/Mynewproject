@@ -1,123 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kurta-Pyjama</title>
-    <link rel="stylesheet" href="button.css"> <!-- assuming you have a style.css file -->
-    
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-  
-      .slider {
-        position: relative;
-        width: 80%;
-        max-width: 600px;
-        margin: auto;
-        overflow: hidden;
-      }
-  
-      .slider-wrapper {
-        display: flex;
-        transition: transform 0.5s ease;
-      }
-  
-      .slide {
-        min-width: 100%;
-        position: relative;
-        text-align: center;
-      }
-  
-      .slide img {
-        width: 100%;
-      }
-  
-      .spec {
-        position: absolute;
-        bottom: 20px;
-        width: 100%;
-        color: white;
-        background: rgba(0, 0, 0, 0.5);
-        font-size: 1.2em;
-        padding: 10px;
-        opacity: 0;
-        transition: opacity 0.5s;
-      }
-  
-      .active .spec {
-        opacity: 1;
-      }
-  
-      .arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        border: none;
-        font-size: 2em;
-        cursor: pointer;
-        padding: 10px;
-      }
-  
-      .left {
-        left: 0;
-      }
-  
-      .right {
-        right: 0;
-      }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pant-Shirt</title>
+  <style>
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      position: relative; /* To position the button correctly */
+    }
+
+    .done-button {
+      position: absolute;
+      bottom: 5px; /* Position from bottom */
+      right: 20px; /* Position from right */
+      background-color: #6AB187; /* Green background */
+      color: white; /* White text */
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      outline: none;
+    }
+
+    .done-button:hover {
+      background-color: #4f8c5b; /* Darker green when hovered */
+      transform: scale(1.05); /* Slight zoom effect */
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
+    }
+
+    .done-button:active {
+      background-color: #3d693f; /* Even darker when clicked */
+      transform: scale(1.03); /* Slightly smaller when clicked */
+    }
+
+    .done-button:focus {
+      outline: none;
+    }
+
+    .done-button span {
+      margin-left: 10px;
+    }
 
 
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .selection-section {
+      text-align: center;
+      padding: 20px;
+      background-color: #6AB187;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .selection-section h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .slider-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .slider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 60%;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .slider .slide {
+      display: none;
+      width: 100%;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .slider .slide.active {
+      display: block;
+    }
+
+    .slide img {
+      width: 80%;
+      height: auto;
+      max-height: 180px;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .slide p {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .fabric-details {
+      font-size: 14px;
+      color: #555;
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+
+    .price-tag {
+      font-weight: bold;
+      color: #0066cc;
+    }
+
+    .select-btn {
+      margin-top: 10px;
+      background-color: #6AB187;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .select-btn:hover {
+      background-color: #004b99;
+      transform: scale(1.05);
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .arrow.left {
+      left: -25px;
+    }
+
+    .arrow.right {
+      right: -25px;
+    }
+  </style>
 </head>
 <body>
-  <div class="slider">
-    <div class="slider-wrapper">
-      <div class="slide" data-spec="Specification 1">
-        <img src="image1.jpg" alt="Image 1">
-        <div class="spec">Specification 1</div>
-      </div>
-      <div class="slide" data-spec="Specification 2">
-        <img src="image2.jpg" alt="Image 2">
-        <div class="spec">Specification 2</div>
-      </div>
-      <div class="slide" data-spec="Specification 3">
-        <img src="image3.jpg" alt="Image 3">
-        <div class="spec">Specification 3</div>
-      </div>
-    </div>
-    <button class="arrow left" onclick="prevSlide()">&#10094;</button>
-    <button class="arrow right" onclick="nextSlide()">&#10095;</button>
+
+  <div class="selection-section">
+    <h2>Pant-Shirt</h2>
   </div>
-  
+
+  <!-- Pant Fabric Slider -->
+  <div class="slider-container">
+    <h3>Pant Fabric</h3>
+    <div class="slider">
+      <div class="arrow left" onclick="prevSlide('pant')">&#10094;</div>
+      <div id="pantFabricGallery" class="slides">
+        <!-- Pant fabric options will be displayed here -->
+      </div>
+      <div class="arrow right" onclick="nextSlide('pant')">&#10095;</div>
+    </div>
+  </div>
+
+  <!-- Shirt Fabric Slider -->
+  <div class="slider-container">
+    <h3>Shirt Fabric</h3>
+    <div class="slider">
+      <div class="arrow left" onclick="prevSlide('shirt')">&#10094;</div>
+      <div id="shirtFabricGallery" class="slides">
+        <!-- Shirt fabric options will be displayed here -->
+      </div>
+      <div class="arrow right" onclick="nextSlide('shirt')">&#10095;</div>
+    </div>
+  </div>
+
+  <button class="done-button">
+    Done
+    <span>&#10003;</span> <!-- Checkmark icon -->
+  </button>
+
   <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-  
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.remove('active');
-        slide.style.transform = `translateX(-${index * 100}%)`;
+    const fabricOptions = {
+      pant: [
+        { name: "Elegant Wool", img: "./Pant-images/Pant1.jpeg", price: "$120", type: "Wool", description: "High-quality wool perfect for formal coats." },
+        { name: "Premium Cotton", img: "./Pant-images/Pant2.jpeg", price: "$90", type: "Cotton", description: "Soft and breathable cotton fabric for comfort." },
+        { name: "Classic Tweed", img: "./Pant-images/Pant3.jpeg", price: "$150", type: "Tweed", description: "Traditional tweed ideal for a stylish look." }
+        
+      ],
+      shirt: [
+        { name: "Linen Blend", img: "fabric4.jpg", price: "$80", type: "Linen", description: "Lightweight linen blend for a casual shirt." },
+        { name: "Soft Cotton", img: "fabric5.jpg", price: "$70", type: "Cotton", description: "Smooth cotton with a soft texture for comfort." },
+        { name: "Silk Mix", img: "fabric6.jpg", price: "$110", type: "Silk", description: "Elegant silk mix, perfect for formal occasions." }
+      ]
+    };
+
+    let currentPantSlide = 0;
+    let currentShirtSlide = 0;
+
+    function updateFabricGallery(type) {
+      const galleryId = type === 'pant' ? 'pantFabricGallery' : 'shirtFabricGallery';
+      const gallery = document.getElementById(galleryId);
+      gallery.innerHTML = ""; // Clear existing options
+
+      fabricOptions[type].forEach((fabric, index) => {
+        const fabricItem = document.createElement("div");
+        fabricItem.classList.add("slide");
+        if (index === 0) fabricItem.classList.add("active");
+
+        fabricItem.innerHTML = `
+          <img src="${fabric.img}" alt="${fabric.name}">
+          <p>${fabric.name}</p>
+          <div class="fabric-details">
+            <p><strong>Type:</strong> ${fabric.type}</p>
+            <p><strong>Description:</strong> ${fabric.description}</p>
+            <p class="price-tag"><strong>Price:</strong> ${fabric.price}</p>
+          </div>
+          <button class="select-btn">Select</button>
+        `;
+
+        gallery.appendChild(fabricItem);
       });
-      slides[index].classList.add('active');
     }
-  
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      showSlide(currentSlide);
+
+    function showSlide(type, index) {
+      const slides = document.querySelectorAll(`#${type}FabricGallery .slide`);
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
     }
-  
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      showSlide(currentSlide);
+
+    function nextSlide(type) {
+      const slides = document.querySelectorAll(`#${type}FabricGallery .slide`);
+      if (type === 'pant') {
+        currentPantSlide = (currentPantSlide + 1) % slides.length;
+        showSlide('pant', currentPantSlide);
+      } else {
+        currentShirtSlide = (currentShirtSlide + 1) % slides.length;
+        showSlide('shirt', currentShirtSlide);
+      }
     }
-  
-    // Initialize the slider
-    showSlide(currentSlide);
+
+    function prevSlide(type) {
+      const slides = document.querySelectorAll(`#${type}FabricGallery .slide`);
+      if (type === 'pant') {
+        currentPantSlide = (currentPantSlide - 1 + slides.length) % slides.length;
+        showSlide('pant', currentPantSlide);
+      } else {
+        currentShirtSlide = (currentShirtSlide - 1 + slides.length) % slides.length;
+        showSlide('shirt', currentShirtSlide);
+      }
+    }
+
+    // Initialize both fabric galleries
+    updateFabricGallery('pant');
+    updateFabricGallery('shirt');
   </script>
+
 </body>
 </html>
