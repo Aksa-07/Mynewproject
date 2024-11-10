@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Appointment Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Book an Appointment</h2>
+    <form id="bookingForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10}" placeholder="10 digits only">
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+
+        <h3>Complete Home Address</h3>
+        <label for="house">House No., Building Name:</label>
+        <input type="text" id="house" name="house" required>
+
+        <label for="road">Road name, Area, Colony:</label>
+        <input type="text" id="road" name="road" required>
+
+        <label for="pincode">Pincode:</label>
+        <input type="text" id="pincode" name="pincode" required pattern="[0-9]{6}" placeholder="6 digits only">
+
+        <h3>Select Fabrics</h3>
+        <div class="fabric-options">
+            <label><input type="checkbox" name="fabric" value="Cotton"> Cotton</label>
+            <label><input type="checkbox" name="fabric" value="Silk"> Silk</label>
+            <label><input type="checkbox" name="fabric" value="Linen"> Linen</label>
+            <label><input type="checkbox" name="fabric" value="Denim"> Denim</label>
+            <label><input type="checkbox" name="fabric" value="Wool"> Wool</label>
+            <label><input type="checkbox" name="fabric" value="Polyester"> Polyester</label>
+        </div>
+
+        <label for="date">Pick Home Visit Date:</label>
+        <select id="date" name="date" required>
+            <option value="">Select a date</option>
+            <option value="2024-11-15">November 15, 2024</option>
+            <option value="2024-11-16">November 16, 2024</option>
+            <option value="2024-11-17">November 17, 2024</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script src="appointment.js"></script>
+</body>
+</html>
