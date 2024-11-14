@@ -180,7 +180,9 @@
                 <a href="appointment.html">
                 <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Get a booking</button>
               </a>
-                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Contact Us</button>
+                <!--button type="button" class="btn btn-outline-secondary btn-lg px-4">Contact Us</button-->
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="scrollToFooter()">Contact Us</button>
+
               </div>
             </div>
             <div class="overflow-hidden" style="max-height: 30vh;">
@@ -191,76 +193,78 @@
 
       </section> 
 
-      <section>
-        <!--Slider Wrapper -->
-        <div class="css-slider-wrapper">
-          <input type="radio" name="slider" class="slide-radio1" checked id="slider_1">
-          <input type="radio" name="slider" class="slide-radio2" id="slider_2">
-          <input type="radio" name="slider" class="slide-radio3" id="slider_3">
-          <input type="radio" name="slider" class="slide-radio4" id="slider_4">
-          
-          <!-- Slider Pagination-->
-          <div class="slider-pagination">
-            <label for="slider_1" class="page1"></label>
-            <label for="slider_2" class="page2"></label>
-            <label for="slider_3" class="page3"></label>
-            <label for="slider_4" class="page4"></label>
-          </div>
-          
-          <!-- Slider #1 -->
-          <div class="slider slide-1">
-            <img src="Images/image1.jpg" alt="">
-            <div class="slider-content">
-              <h4>New Product</h4>
-              <h2>Pant-Shirt</h2>
-              <button type="button" class="buy-now-btn"></button>
-            </div>
-            <div class="number-pagination">
-              <span>1</span>
-            </div>
-          </div>
-          
-          <!-- Slider #2 -->
-          <div class="slider slide-2">
-            <img src="Images/image4.jpg" alt="">
-            <div class="slider-content">
-              <h4>New Product</h4>
-              <h2>Kurta-Pajama</h2>
-              <button type="button" class="buy-now-btn"></button>
-            </div>
-            <div class="number-pagination">
-              <span>2</span>
-            </div>
-          </div>
-          
-          <!-- Slider #3 -->
-          <div class="slider slide-3">
-            <img src="Images/image2.jpg" alt="">
-            <div class="slider-content">
-              <h4>New Product</h4>
-              <h2>Coat-Pant</h2>
-              <button type="button"  class="buy-now-btn"></button>
-            </div>
-            <div class="number-pagination">
-              <span>3</span>
-            </div>
-          </div>
-          
-          <!-- Slider #4 -->
-          <div class="slider slide-4">
-            <img src="Images/image3.jpg" alt="">
-            <div class="slider-content">
-              <h4>New Product</h4>
-              <h2>3-Piece Suit</h2>
-              <button type="button" class="buy-now-btn"></button>
-            </div>
-            <div class="number-pagination">
-              <span>4</span>
-            </div>
-          </div>
-        </div>
+    
 
-      </section>
+
+
+
+      <section id="slider-with-captions">
+        <div class="container py-5">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <!-- Indicators -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                </div>
+    
+                <!-- Slides -->
+                <div class="carousel-inner">
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active">
+                        <img src="Images/image1.jpg" class="d-block w-100" alt="Pant-Shirt">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Pant-Shirt</h5>
+                            <p>New product showcasing the perfect blend of style and comfort.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Slide 2 -->
+                    <div class="carousel-item">
+                        <img src="Images/image4.jpg" class="d-block w-100" alt="Kurta-Pajama">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Kurta-Pajama</h5>
+                            <p>Elegant traditional attire tailored for modern occasions.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Slide 3 -->
+                    <div class="carousel-item">
+                        <img src="Images/image2.jpg" class="d-block w-100" alt="Coat-Pant">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Coat-Pant</h5>
+                            <p>Refined and professional designs for every formal need.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Slide 4 -->
+                    <div class="carousel-item">
+                        <img src="Images/image3.jpg" class="d-block w-100" alt="3-Piece Suit">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>3-Piece Suit</h5>
+                            <p>Classic and stylish, tailored for the perfect fit.</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+      
+
+      
+      
     
 
     <!-- About Us Section -->
@@ -292,7 +296,9 @@
 
 <!-- Footer Section -->
 <section>
-<footer class="footer bg-dark text-white py-4">
+<!--footer class="footer bg-dark text-white py-4"-->
+  <footer id="footer-section" class="footer bg-dark text-white py-4">
+
   <div class="container">
       <div class="row">
           <!-- Company Info -->
@@ -337,6 +343,12 @@
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="script.js"></script>
       
+      <script>
+        function scrollToFooter() {
+            document.getElementById('footer-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+    
 
 </body>
 </html>

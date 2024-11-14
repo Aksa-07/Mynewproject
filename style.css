@@ -345,7 +345,7 @@
   background: transparent;
 }
  
-/* Slider Slide Effect */
+/* Slider Slide Effect 
 .slide-radio1:checked ~ .slider {
   -webkit-transform: translateX(0%);
   transform: translateX(0%);
@@ -379,6 +379,18 @@
   transform: translateX(0);
   opacity: 1;
 }
+*/
+.carousel-caption h5 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.carousel-caption p {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+
 
 /* Responsive */
 @media only screen and (max-width: 768px) {
