@@ -131,313 +131,146 @@
   color: #fff; /* White text on hover */
 }
 
-/* Slider Wrapper */
-.css-slider-wrapper {
-  margin-top:0;
-  padding:0;
-  display: block;
-  background: #FFF;
+/* Container for the section */
+section {
+  background-color: #f7f7f7;
+}
+
+/* Styling for the overall container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  position: relative;
+}
+
+/* Slider wrapper */
+.slide {
+  display: flex;
   overflow: hidden;
   position: relative;
-  width: 100%;
-  height:100vh ;
-  overflow-y: hidden;
-  box-sizing: border-box;/* Add this to ensure full height */
-  
 }
 
-
-/* Slider */
-.slider {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 1;
-  z-index: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  -webkit-transition: -webkit-transform 1600ms;
-  transition: -webkit-transform 1600ms, transform 1600ms;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-}
- 
-/* Slides Background Color */
-.slide-1 {
-  background: #a9785c;
-  left: 0;
-}
-.slide-2 {
-  background:#fbad99 ;
-  left: 100%
-}
-.slide-3 {
-  background: #9ea6b3;
-  left: 200%
-}
-.slide-4 {
-  background: #b1a494;
-  left: 300%;
-}
-.slider {
-  display: flex;
-  justify-content: flex-start;
-}
-.slider-content {
-  width: 635px;
-  padding-left: 100px;
-}
-
-/* Slider Inner Slide Effect */
-.slider h2 {
-  color: #333333;
-  font-weight: 900;
-  text-transform: capitalize;
-  font-size: 60px;
-  font-weight: 300;
-  line-height: 1.2;
-  opacity: 0;
-  -webkit-transform: translateX(500px);
-  transform: translateX(500px);
-  margin-top: 0;
-  letter-spacing: 2px;
-}
- 
-.slider h4 {
-  font-size: 22px;
-  font-family: "Oswald", sans-serif;
-  color: rgba(51, 51, 51, 0.349);
-  font-weight: bold;
-  text-transform: uppercase;
-  line-height: 1.2;
-  opacity: 0;
-  -webkit-transform: translateX(500px);
-  transform: translateX(500px);
-}
- 
-
-.slider > img {
-  position: absolute;
-  right: 10%;
-  bottom: 0;
-  height: 100%;
-  opacity: 0;
-  -webkit-transform: translateX(500px);
-  transform: translateX(500px);
-}
-
-.slide-1 > img {
-  right: 0;
-}
- 
-.buy-now-btn {
-  background-color: #ea2e49;
-  width: 220px;
-  height: 50px;
-  border-radius: 30px;
-  border: none;
-  font-family: Montserrat;
-  font-size: 20px;
-  font-weight: 100;
-  color: #fff;
-  text-align: left;
-  padding-left: 35px;
+/* Individual slide */
+.item {
+  min-width: 100%; /* Ensure the slide takes up full width */
+  height: 100vh; /* Set the height to cover the full viewport height */
+  background-size: cover; /* Ensure the image covers the entire element */
+  background-position: center; /* Keep the image centered */
   position: relative;
-  cursor: pointer;
-  transition: all .2s;
-}
- 
-.buy-now-btn:hover {
-  box-shadow: 0px 0px 60px -17px rgba(51,51,51,1);
-}
- 
-.buy-now-btn:after {
-  content: 'Choose Fabric & Stitch';
-  font-size: 12px;
-  font-weight: bold;
-  text-transform: uppercase;
-  position: absolute;
-  /* right: 35px; */
-  top: 18px;
-}
- 
-.slider .buy-now-btn:focus,
-.navigation .login-btn:focus {
-  outline: none;
+  transition: transform 0.5s ease-in-out;
 }
 
-/* Animations */
-.slider h2 {
-  -webkit-transition: opacity 800ms, -webkit-transform 800ms;
-  transition: transform 800ms, opacity 800ms;
-  -webkit-transition-delay: 1s; /* Safari */
-  transition-delay: 1s;
-}
-.slider h4 {
-  -webkit-transition: opacity 800ms, -webkit-transform 800ms;
-  transition: transform 800ms, opacity 800ms;
-  -webkit-transition-delay: 1.4s; /* Safari */
-  transition-delay: 1.4s;
-}
-.slider > img {
-  -webkit-transition: opacity 800ms, -webkit-transform 800ms;
-  transition: transform 800ms, opacity 800ms;
-  -webkit-transition-delay: 1.2s; /* Safari */
-  transition-delay: 1.2s;
-}
-
-/* Number Pagination */
-.number-pagination {
+/* Content inside each item */
+.content {
   position: absolute;
   bottom: 30px;
-  right: 100px;
-  font-family: "Oswald", sans-serif;
-  font-weight: bold;
-}
- 
-.number-pagination span {
-  font-size: 30px;
-  color: #ea2e49;
-  letter-spacing: 4px;
-}
- 
-.number-pagination span:after {
-  content: "/4";
-  font-size: 16px;
+  left: 30px;
   color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
-/* Slider Pagger */
-.slider-pagination {
-  position: absolute;
-  bottom: 30px;
-  width: 575px;
-  left: 100px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-}
-.slider-pagination label {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-  background: #fff;
-  margin: 0 10px;
-  cursor: pointer;
-}
-
-
-/* Slider Pagger Event */
-.slide-radio1:checked ~ .slider-pagination .page1,
-.slide-radio2:checked ~ .slider-pagination .page2,
-.slide-radio3:checked ~ .slider-pagination .page3,
-.slide-radio4:checked ~ .slider-pagination .page4 {
-  width: 14px;
-  height: 14px;
-  border: 2px solid #ea2e49;
-  background: transparent;
-}
- 
-/* Slider Slide Effect 
-.slide-radio1:checked ~ .slider {
-  -webkit-transform: translateX(0%);
-  transform: translateX(0%);
-}
-.slide-radio2:checked ~ .slider {
-  -webkit-transform: translateX(-100%);
-  transform: translateX(-100%);
-}
-.slide-radio3:checked ~ .slider {
-  -webkit-transform: translateX(-200%);
-  transform: translateX(-200%);
-}
-.slide-radio4:checked ~ .slider {
-  -webkit-transform: translateX(-300%);
-  transform: translateX(-300%);
-}
- 
-.slide-radio1:checked ~ .slide-1 h2,
-.slide-radio2:checked ~ .slide-2 h2,
-.slide-radio3:checked ~ .slide-3 h2,
-.slide-radio4:checked ~ .slide-4 h2,
-.slide-radio1:checked ~ .slide-1 h4,
-.slide-radio2:checked ~ .slide-2 h4,
-.slide-radio3:checked ~ .slide-3 h4,
-.slide-radio4:checked ~ .slide-4 h4,
-.slide-radio1:checked ~ .slide-1 > img,
-.slide-radio2:checked ~ .slide-2 > img,
-.slide-radio3:checked ~ .slide-3 > img,
-.slide-radio4:checked ~ .slide-4 > img {
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
-  opacity: 1;
-}
-*/
-.carousel-caption h5 {
-  font-size: 1.5rem;
+/* Name styling */
+.name {
+  font-size: 36px;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.carousel-caption p {
-  font-size: 1rem;
-  margin-top: 0.5rem;
+/* Description styling */
+.des {
+  font-size: 18px;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+
+/* Button styling */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Navigation buttons styling */
+.button {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+button.prev, button.next {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  padding: 10px;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.prev:hover, button.next:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+button i {
+  font-size: 20px;
+}
+
+/* Ensure buttons are centered and on top of the slides */
+button.prev {
+  left: 20px;
+}
+
+button.next {
+  right: 20px;
+}
+
+.slide {
+  position: relative;
+  height: 100vh; /* Set height to the viewport height */
+  width: 100%;
+  overflow: hidden; /* Ensure no overflow outside the slide area */
+}
+
+.item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Make the image cover the full height */
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  background-size: cover; /* Scale image to cover entire section */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Avoid repeating if the image is small */
+}
+
+.item.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 
 
-/* Responsive */
-@media only screen and (max-width: 768px) {
-  .slider h2 {
-    font-size: 20px;
-  }
-  .slider h4 {
-    font-size: 16px;
-  }
- 
-  .slider-content {
-    padding: 0 2%;
-  }
- 
-  .navigation {
-    padding: 0 2%;
-  }
- 
-  .navigation-left {
-    display: none;
-  }
- 
-  .number-pagination {
-    right: 2%;
-  }
-  .slider-pagination {
-    left: 2%;
-  }
- 
-  .slider .buy-now-btn {
-    padding: 0 15px;
-    width: 175px;
-    height: 42px;
-  }
- 
-  .slider .buy-now-btn:after {
-    top: 15px;
-  }
- 
-  .slider > img {
-    right: 2%;
-  }
- 
-  .slide-1 > img {
-    right: -110px;
-  }
-}
 
 
 /* About Us Section */
@@ -659,6 +492,9 @@ body {
 .alert.error {
   background-color: #f44336; /* Red for error */
 }
+
+
+
 
 
 
