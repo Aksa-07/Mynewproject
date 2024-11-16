@@ -39,6 +39,19 @@
             display: inline-block;
             margin-right: 10px;
         }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .total, .half-payment {
+            font-weight: bold;
+            color: #333;
+        }
         button {
             background-color: #4CAF50;
             color: white;
@@ -74,56 +87,121 @@
         <label for="pincode">Pincode:</label>
         <input type="text" id="pincode" name="pincode" required pattern="[0-9]{6}" placeholder="6 digits only">
 
+        <label>GPS Location:</label>
+        <button type="button" id="getLocation">Get My Location</button>
+        <p id="locationStatus">Location not fetched yet.</p>
+        <input type="hidden" id="latitude" name="latitude">
+        <input type="hidden" id="longitude" name="longitude">
+
         <h3>Select Fabrics</h3>
         <div class="fabric-options">
-            <label><input type="checkbox" name="fabric" value="Cotton"> Cotton</label>
-            <label><input type="checkbox" name="fabric" value="Silk"> Silk</label>
-            <label><input type="checkbox" name="fabric" value="Linen"> Linen</label>
-            <label><input type="checkbox" name="fabric" value="Denim"> Denim</label>
-            <label><input type="checkbox" name="fabric" value="Wool"> Wool</label>
-            <label><input type="checkbox" name="fabric" value="Polyester"> Polyester</label>
+            <label><input type="checkbox" name="fabric" value="Coat Pant"> Coat Pant</label>
+            <label><input type="checkbox" name="fabric" value="Shirt Pant"> Shirt Pant</label>
+            <label><input type="checkbox" name="fabric" value="Kurta Pajama"> Kurta Pajama</label>
+            <label><input type="checkbox" name="fabric" value="3 Piece Suit"> 3 Piece Suit</label>
         </div>
 
         <label for="date">Pick Home Visit Date:</label>
         <select id="date" name="date" required>
             <option value="">Select a date</option>
-            <option value="2024-11-15">November 15, 2024</option>
-            <option value="2024-11-16">November 16, 2024</option>
-            <option value="2024-11-17">November 17, 2024</option>
         </select>
+
+        <h3>Payment</h3>
+        <table>
+            <tr>
+                <td>Measurement Charges:</td>
+                <td>₹400</td>
+            </tr>
+            <tr>
+                <td>Fabric Price:</td>
+                <td><input type="number" id="fabricPrice" name="fabricPrice" placeholder="Enter fabric price" required></td>
+            </tr>
+            <tr>
+                <td>Stitching Price:</td>
+                <td><input type="number" id="stitchPrice" name="stitchPrice" placeholder="Enter stitching price" required></td>
+            </tr>
+            <tr class="total">
+                <td>Total Amount:</td>
+                <td id="totalAmount">₹0</td>
+            </tr>
+            <tr class="half-payment">
+                <td>Amount to Pay (50% of Total):</td>
+                <td id="halfPayment">₹0</td>
+            </tr>
+        </table>
 
         <button type="submit">Submit</button>
     </form>
 </div>
 
 <script>
+    // Populate 15 days dynamically for the "Pick Home Visit Date" dropdown
+    const dateSelect = document.getElementById("date");
+    const today = new Date();
+    for (let i = 1; i <= 15; i++) {
+        const visitDate = new Date(today);
+        visitDate.setDate(today.getDate() + i);
+        const formattedDate = visitDate.toISOString().split('T')[0];
+        const option = document.createElement("option");
+        option.value = formattedDate;
+        option.textContent = visitDate.toDateString();
+        dateSelect.appendChild(option);
+    }
+
+    // Fetch GPS Location
+    const getLocationButton = document.getElementById("getLocation");
+    const locationStatus = document.getElementById("locationStatus");
+    const latitudeInput = document.getElementById("latitude");
+    const longitudeInput = document.getElementById("longitude");
+
+    getLocationButton.addEventListener("click", () => {
+        if (navigator.geolocation) {
+            locationStatus.textContent = "Fetching location...";
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+
+                    locationStatus.textContent = `Location fetched: Latitude ${latitude}, Longitude ${longitude}`;
+                    latitudeInput.value = latitude;
+                    longitudeInput.value = longitude;
+                },
+                (error) => {
+                    locationStatus.textContent = "Unable to fetch location. Please enable GPS.";
+                }
+            );
+        } else {
+            locationStatus.textContent = "Geolocation is not supported by your browser.";
+        }
+    });
+
+    // Calculate total payment amount
+    const calculateTotal = () => {
+        const fabricPrice = parseFloat(document.getElementById("fabricPrice").value) || 0;
+        const stitchPrice = parseFloat(document.getElementById("stitchPrice").value) || 0;
+        const measurementCharges = 400;
+        const total = measurementCharges + fabricPrice + stitchPrice;
+        const halfPayment = total / 2;
+        document.getElementById("totalAmount").textContent = `₹${total.toFixed(2)}`;
+        document.getElementById("halfPayment").textContent = `₹${halfPayment.toFixed(2)}`;
+    };
+
+    document.getElementById("fabricPrice").addEventListener("input", calculateTotal);
+    document.getElementById("stitchPrice").addEventListener("input", calculateTotal);
+
     document.getElementById("bookingForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent form submission to allow validation
+        event.preventDefault();
 
-        // Retrieve form values
         const name = document.getElementById("name").value;
-        const mobile = document.getElementById("mobile").value;
-        const email = document.getElementById("email").value;
-        const house = document.getElementById("house").value;
-        const road = document.getElementById("road").value;
-        const pincode = document.getElementById("pincode").value;
-        const date = document.getElementById("date").value;
+        const latitude = latitudeInput.value;
+        const longitude = longitudeInput.value;
 
-        // Retrieve selected fabrics
-        const fabricElements = document.querySelectorAll("input[name='fabric']:checked");
-        const fabrics = Array.from(fabricElements).map(fabric => fabric.value);
-
-        // Check if all fields are filled
-        if (!name || !mobile || !email || !house || !road || !pincode || !date || fabrics.length === 0) {
-            alert("Please fill all the fields and select at least one fabric.");
+        if (!latitude || !longitude) {
+            alert("Please fetch your GPS location before submitting the form.");
             return;
         }
 
-        // Confirm booking details
-        alert(`Appointment booked successfully!\n\nDetails:\nName: ${name}\nMobile: ${mobile}\nEmail: ${email}\nAddress:\n- ${house}\n- ${road}\nPincode: ${pincode}\nSelected Fabrics: ${fabrics.join(', ')}\nDate: ${date}`);
-        
-        // Clear the form after submission
-        document.getElementById("bookingForm").reset();
+        alert(`Form submitted!\nName: ${name}\nGPS Location: Latitude ${latitude}, Longitude ${longitude}`);
     });
 </script>
 

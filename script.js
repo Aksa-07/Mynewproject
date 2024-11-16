@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const slides = document.querySelectorAll('.slide .item');
     let currentIndex = 0;
