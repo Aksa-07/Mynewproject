@@ -223,6 +223,49 @@
             </select>
         </div>
 
+        
+        <!--Visiting date-->
+<label for="date">Pick Home Visit Date:</label>
+<select id="date" name="date" required>
+    <option value="">Select a date</option>
+</select>
+
+<script>
+    // Populate the date dropdown with the next 15 days
+    function populateDateDropdown() {
+        const dateDropdown = document.getElementById('date');
+        const today = new Date();
+
+        for (let i = 0; i < 15; i++) {
+            const futureDate = new Date(today);
+            futureDate.setDate(today.getDate() + i);
+
+            const yyyy = futureDate.getFullYear();
+            const mm = String(futureDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            const dd = String(futureDate.getDate()).padStart(2, '0');
+
+            const dateValue = `${yyyy}-${mm}-${dd}`;
+            const displayDate = futureDate.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+            });
+
+            const option = document.createElement('option');
+            option.value = dateValue;
+            option.textContent = displayDate;
+
+            dateDropdown.appendChild(option);
+        }
+    }
+
+    // Call the function to populate the dropdown
+    populateDateDropdown();
+</script>
+
+
+
         <!-- Payment -->
         <div class="form-section">
             <h3>Payment</h3>
