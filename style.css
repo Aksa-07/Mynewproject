@@ -9,6 +9,7 @@
 }
 
 
+
 /* Gradient background */
 .gradient-background {
   /* background-image: linear-gradient(to right, #141e30, #243b55); */
@@ -491,6 +492,51 @@ body {
 
 .alert.error {
   background-color: #f44336; /* Red for error */
+}
+
+
+.shadow-box {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #fff;
+}
+
+.shadow-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.feature-content {
+  text-align: center;
+}
+
+.feature-icon {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+
+.row-cols-1 .col {
+  margin-bottom: 15px;
+}
+
+@media (min-width: 992px) {
+  .shadow-box {
+    margin: 0 auto;
+  }
+}
+
+.feature:hover {
+  transform: scale(1.05); /* Slightly enlarges the card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow on hover */
+}
+
+.feature:hover .feature-icon {
+  background-color: #0056b3; /* Changes the icon background color on hover */
+  transition: background-color 0.3s ease; /* Smooth background color change */
 }
 
 

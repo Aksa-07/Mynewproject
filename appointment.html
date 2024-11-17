@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Appointment Form</title>
+    <title>Booking Appointment Form with Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #f0f4f7;
         }
         .form-container {
-            max-width: 500px;
+            max-width: 600px;
             margin: 50px auto;
-            padding: 20px;
+            padding: 30px;
             background: #ffffff;
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -22,6 +27,7 @@
         }
         h2, h3 {
             color: #333;
+            text-align: center;
         }
         label {
             display: block;
@@ -30,27 +36,34 @@
         }
         input, select, button {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .fabric-options label {
-            display: inline-block;
-            margin-right: 10px;
-        }
-        table {
-            width: 100%;
+            padding: 12px;
             margin-bottom: 20px;
-            border-collapse: collapse;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
-        td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
+        #map {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
         }
-        .total, .half-payment {
-            font-weight: bold;
-            color: #333;
+        .coordinates {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .coordinates input {
+            width: 48%;
+        }
+        .info-box {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #444;
         }
         button {
             background-color: #4CAF50;
@@ -61,147 +74,209 @@
         button:hover {
             background-color: #45a049;
         }
+        .form-section {
+            margin-bottom: 30px;
+        }
     </style>
+
+<script type="module">
+   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+   import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+    // Firebase config
+    const firebaseConfig = {
+        apiKey: "AIzaSyBdKfeSzGTfnWhHLqSDOEbLzrt6zCw9qGk",
+        authDomain: "signupform-3ddf1.firebaseapp.com",
+        databaseURL: "https://signupform-3ddf1-default-rtdb.firebaseio.com",
+        projectId: "signupform-3ddf1",
+        storageBucket: "signupform-3ddf1.firebasestorage.app",
+        messagingSenderId: "630383702671",
+        appId: "1:630383702671:web:2b6c0190911e08dd4536fa"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    
+    // Function to get address from latitude and longitude using OpenCage API
+    async function getAddressFromCoordinates(lat, lon) {
+        const apiKey = "c8119bc2b51b4d1f9c1a96d35e744a60"; // Replace with your OpenCage API key
+        const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${apiKey}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            return data.results[0].formatted;
+        } catch (error) {
+            console.error("Error fetching address:", error);
+        }
+    }
+
+    // Form submission event handler
+    document.getElementById('bookingForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const name = document.getElementById('name').value;
+        const mobile = document.getElementById('mobile').value;
+        const email = document.getElementById('email').value;
+        const fabric = document.getElementById('fabric').value;
+        const paymentMode = document.getElementById('paymentMode').value;
+        const houseNo = document.getElementById('houseNo').value; // Get house number
+        const landmark = document.getElementById('landmark').value; // Get nearby landmark
+        const latitude = parseFloat(document.getElementById('latitude').value);
+        const longitude = parseFloat(document.getElementById('longitude').value);
+
+        if (name && mobile && email && fabric && paymentMode && houseNo && landmark) {
+            // Get address from coordinates
+            const address = await getAddressFromCoordinates(latitude, longitude);
+            try {
+                await addDoc(collection(db, "appointments"), {
+                    name,
+                    mobile,
+                    email,
+                    fabric,
+                    paymentMode,
+                    houseNo,
+                    landmark,
+                    address,
+                    latitude,
+                    longitude,
+                    timestamp: serverTimestamp()
+                });
+                alert("Your appointment has been successfully booked!");
+           
+                // Redirect to payment page based on selected payment mode
+                if (paymentMode === "Net Banking") {
+                    window.location.href = "https://www.example.com/net-banking-payment"; // Replace with your actual payment page URL
+                } else if (paymentMode === "Credit Card") {
+                    window.location.href = "https://www.example.com/credit-card-payment"; // Replace with your actual payment page URL
+                } else if (paymentMode === "Debit Card") {
+                    window.location.href = "https://www.example.com/debit-card-payment"; // Replace with your actual payment page URL
+                } else if (paymentMode === "UPI") {
+                    window.location.href = "https://www.example.com/upi-payment"; // Replace with your actual payment page URL
+                }
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("There was an issue with booking your appointment.");
+            }
+        } else {
+            alert("Please fill out all fields.");
+        }
+    });
+
+
+
+
+</script>
+
 </head>
 <body>
 
 <div class="form-container">
     <h2>Book an Appointment</h2>
     <form id="bookingForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+            <!-- User Details -->
+            <div class="form-section">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+        
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10}" placeholder="10 digits only">
+        
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+        
+            <!-- Coordinates -->
+            <div class="form-section">
+                <h3>Set Address Using Map</h3>
+                <div class="coordinates">
+                    <input type="text" id="latitude" name="latitude" placeholder="Latitude" readonly>
+                    <input type="text" id="longitude" name="longitude" placeholder="Longitude" readonly>
+                </div>
+            </div>
+        
+            <!-- Map -->
+            <div class="form-section">
+                <div id="map"></div>
+                <button type="button" id="resetLocationBtn">Reset to Current Location</button>
+            </div>
 
-        <label for="mobile">Mobile Number:</label>
-        <input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10}" placeholder="10 digits only">
+        <!-- House Number and Nearby Landmark -->
+        <div class="form-section">
+            <label for="houseNo">House Number:</label>
+            <input type="text" id="houseNo" name="houseNo" required>
 
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email" required>
-
-        <h3>Complete Home Address</h3>
-        <label for="house">House No., Building Name:</label>
-        <input type="text" id="house" name="house" required>
-
-        <label for="road">Road name, Area, Colony:</label>
-        <input type="text" id="road" name="road" required>
-
-        <label for="pincode">Pincode:</label>
-        <input type="text" id="pincode" name="pincode" required pattern="[0-9]{6}" placeholder="6 digits only">
-
-        <label>GPS Location:</label>
-        <button type="button" id="getLocation">Get My Location</button>
-        <p id="locationStatus">Location not fetched yet.</p>
-        <input type="hidden" id="latitude" name="latitude">
-        <input type="hidden" id="longitude" name="longitude">
-
-        <h3>Select Fabrics</h3>
-        <div class="fabric-options">
-            <label><input type="checkbox" name="fabric" value="Coat Pant"> Coat Pant</label>
-            <label><input type="checkbox" name="fabric" value="Shirt Pant"> Shirt Pant</label>
-            <label><input type="checkbox" name="fabric" value="Kurta Pajama"> Kurta Pajama</label>
-            <label><input type="checkbox" name="fabric" value="3 Piece Suit"> 3 Piece Suit</label>
+            <label for="landmark">Nearby Landmark:</label>
+            <input type="text" id="landmark" name="landmark" required>
         </div>
 
-        <label for="date">Pick Home Visit Date:</label>
-        <select id="date" name="date" required>
-            <option value="">Select a date</option>
-        </select>
+        <!-- Fabric Selection -->
+        <div class="form-section">
+            <h3>Select Fabrics</h3>
+            <select id="fabric" name="fabric" required>
+                <option value="">Select a fabric</option>
+                <option value="Coat Pant">Coat Pant</option>
+                <option value="Shirt Pant">Shirt Pant</option>
+                <option value="Kurta Pajama">Kurta Pajama</option>
+                <option value="3 Piece Suit">3 Piece Suit</option>
+            </select>
+        </div>
 
-        <h3>Payment</h3>
-        <table>
-            <tr>
-                <td>Measurement Charges:</td>
-                <td>₹400</td>
-            </tr>
-            <tr>
-                <td>Fabric Price:</td>
-                <td><input type="number" id="fabricPrice" name="fabricPrice" placeholder="Enter fabric price" required></td>
-            </tr>
-            <tr>
-                <td>Stitching Price:</td>
-                <td><input type="number" id="stitchPrice" name="stitchPrice" placeholder="Enter stitching price" required></td>
-            </tr>
-            <tr class="total">
-                <td>Total Amount:</td>
-                <td id="totalAmount">₹0</td>
-            </tr>
-            <tr class="half-payment">
-                <td>Amount to Pay (50% of Total):</td>
-                <td id="halfPayment">₹0</td>
-            </tr>
-        </table>
+        <!-- Payment -->
+        <div class="form-section">
+            <h3>Payment</h3>
+            <label for="paymentMode">Select Payment Mode:</label>
+            <select id="paymentMode" name="paymentMode" required>
+                <option value="">Select Mode of Payment</option>
+                <option value="Net Banking">Net Banking</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="UPI">UPI</option>
+            </select>
+        </div>
 
-        <button type="submit">Submit</button>
+        <!-- Measurement Charge -->
+        <div class="info-box">
+            <p><strong>Measurement Charge: ₹400</strong></p>
+            <p>This is the charge for the tailor to visit your home for taking measurements.</p>
+        </div>
+
+        <button type="submit">Submit Booking</button>
     </form>
 </div>
 
 <script>
-    // Populate 15 days dynamically for the "Pick Home Visit Date" dropdown
-    const dateSelect = document.getElementById("date");
-    const today = new Date();
-    for (let i = 1; i <= 15; i++) {
-        const visitDate = new Date(today);
-        visitDate.setDate(today.getDate() + i);
-        const formattedDate = visitDate.toISOString().split('T')[0];
-        const option = document.createElement("option");
-        option.value = formattedDate;
-        option.textContent = visitDate.toDateString();
-        dateSelect.appendChild(option);
-    }
+    // Initialize Leaflet Map
+    var map = L.map('map').setView([28.6448, 77.216721], 13); // Default view set to Delhi
 
-    // Fetch GPS Location
-    const getLocationButton = document.getElementById("getLocation");
-    const locationStatus = document.getElementById("locationStatus");
-    const latitudeInput = document.getElementById("latitude");
-    const longitudeInput = document.getElementById("longitude");
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 
-    getLocationButton.addEventListener("click", () => {
-        if (navigator.geolocation) {
-            locationStatus.textContent = "Fetching location...";
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
+    var marker = L.marker([28.6448, 77.216721]).addTo(map); // Initial marker position
 
-                    locationStatus.textContent = `Location fetched: Latitude ${latitude}, Longitude ${longitude}`;
-                    latitudeInput.value = latitude;
-                    longitudeInput.value = longitude;
-                },
-                (error) => {
-                    locationStatus.textContent = "Unable to fetch location. Please enable GPS.";
-                }
-            );
-        } else {
-            locationStatus.textContent = "Geolocation is not supported by your browser.";
-        }
+    // Update coordinates when map is clicked
+    map.on('click', function (e) {
+        var lat = e.latlng.lat;
+        var lon = e.latlng.lng;
+        marker.setLatLng([lat, lon]);
+        document.getElementById('latitude').value = lat;
+        document.getElementById('longitude').value = lon;
     });
 
-    // Calculate total payment amount
-    const calculateTotal = () => {
-        const fabricPrice = parseFloat(document.getElementById("fabricPrice").value) || 0;
-        const stitchPrice = parseFloat(document.getElementById("stitchPrice").value) || 0;
-        const measurementCharges = 400;
-        const total = measurementCharges + fabricPrice + stitchPrice;
-        const halfPayment = total / 2;
-        document.getElementById("totalAmount").textContent = `₹${total.toFixed(2)}`;
-        document.getElementById("halfPayment").textContent = `₹${halfPayment.toFixed(2)}`;
-    };
-
-    document.getElementById("fabricPrice").addEventListener("input", calculateTotal);
-    document.getElementById("stitchPrice").addEventListener("input", calculateTotal);
-
-    document.getElementById("bookingForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const name = document.getElementById("name").value;
-        const latitude = latitudeInput.value;
-        const longitude = longitudeInput.value;
-
-        if (!latitude || !longitude) {
-            alert("Please fetch your GPS location before submitting the form.");
-            return;
+    // Reset to current location
+    document.getElementById('resetLocationBtn').addEventListener('click', function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+                map.setView([lat, lon], 13);
+                marker.setLatLng([lat, lon]);
+                document.getElementById('latitude').value = lat;
+                document.getElementById('longitude').value = lon;
+            });
         }
-
-        alert(`Form submitted!\nName: ${name}\nGPS Location: Latitude ${latitude}, Longitude ${longitude}`);
     });
 </script>
 
