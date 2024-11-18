@@ -6,6 +6,7 @@
   font: inherit;
   vertical-align: baseline;
   background-color: transparent; /* or none */
+  font-family: Arial, sans-serif;
 }
 
 
@@ -538,6 +539,101 @@ body {
   background-color: #0056b3; /* Changes the icon background color on hover */
   transition: background-color 0.3s ease; /* Smooth background color change */
 }
+
+
+/* section-5 css */
+
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+    }
+
+    .section {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      letter-spacing: 2px;
+      font-weight: 400;
+      color: #333;
+    }
+
+    .section .underline {
+      width: 50px;
+      height: 3px;
+      background-color: #fdb913;
+      margin: 10px auto 30px;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      width: 200px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 50px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      margin: 0;
+    }
+
+
+    /* slide-4 */
+
+    /* Container */
+.container {
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+}
+
+/* Heading */
+h2 {
+  font-size: 1.8rem;
+}
+
+/* Features */
+.feature {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+.feature-icon {
+  color: #fff;
+}
+
+/* Text */
+.text-muted {
+  font-size: 0.9rem;
+}
+
 
 
 

@@ -112,57 +112,70 @@
         }
     }
 
-    // Form submission event handler
+
     document.getElementById('bookingForm').addEventListener('submit', async function(event) {
-        event.preventDefault(); // Prevent the default form submission
+    event.preventDefault(); // Prevent default form submission
 
-        const name = document.getElementById('name').value;
-        const mobile = document.getElementById('mobile').value;
-        const email = document.getElementById('email').value;
-        const fabric = document.getElementById('fabric').value;
-        const paymentMode = document.getElementById('paymentMode').value;
-        const houseNo = document.getElementById('houseNo').value; // Get house number
-        const landmark = document.getElementById('landmark').value; // Get nearby landmark
-        const latitude = parseFloat(document.getElementById('latitude').value);
-        const longitude = parseFloat(document.getElementById('longitude').value);
+    // Retrieve form inputs
+    const name = document.getElementById('name').value.trim();
+    const mobile = document.getElementById('mobile').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const fabric = document.getElementById('clothingOptions').value.trim();
+    const date = document.getElementById('date').value.trim(); // Ensure date is fetched
+    const paymentMode = document.getElementById('paymentMode').value.trim();
+    const houseNo = document.getElementById('houseNo').value.trim();
+    const landmark = document.getElementById('landmark').value.trim();
+    const latitude = parseFloat(document.getElementById('latitude').value);
+    const longitude = parseFloat(document.getElementById('longitude').value);
 
-        if (name && mobile && email && fabric && paymentMode && houseNo && landmark) {
-            // Get address from coordinates
-            const address = await getAddressFromCoordinates(latitude, longitude);
-            try {
-                await addDoc(collection(db, "appointments"), {
-                    name,
-                    mobile,
-                    email,
-                    fabric,
-                    paymentMode,
-                    houseNo,
-                    landmark,
-                    address,
-                    latitude,
-                    longitude,
-                    timestamp: serverTimestamp()
-                });
-                alert("Your appointment has been successfully booked!");
-           
-                // Redirect to payment page based on selected payment mode
-                if (paymentMode === "Net Banking") {
-                    window.location.href = "https://www.example.com/net-banking-payment"; // Replace with your actual payment page URL
-                } else if (paymentMode === "Credit Card") {
-                    window.location.href = "https://www.example.com/credit-card-payment"; // Replace with your actual payment page URL
-                } else if (paymentMode === "Debit Card") {
-                    window.location.href = "https://www.example.com/debit-card-payment"; // Replace with your actual payment page URL
-                } else if (paymentMode === "UPI") {
-                    window.location.href = "https://www.example.com/upi-payment"; // Replace with your actual payment page URL
-                }
-            } catch (error) {
-                console.error("Error adding document: ", error);
-                alert("There was an issue with booking your appointment.");
-            }
-        } else {
-            alert("Please fill out all fields.");
+    // Check for missing fields
+    if (!name || !mobile || !email || !fabric || !date || !paymentMode || !houseNo || !landmark || isNaN(latitude) || isNaN(longitude)) {
+        alert("Please fill out all fields correctly."); // Show an error
+        return; // Stop the form submission
+    }
+
+    try {
+        // Get address from coordinates
+        const address = await getAddressFromCoordinates(latitude, longitude);
+
+        // Add data to Firestore
+        await addDoc(collection(db, "appointments"), {
+            name,
+            mobile,
+            email,
+            fabric,
+            date, // Add the date here
+            paymentMode,
+            houseNo,
+            landmark,
+            address,
+            latitude,
+            longitude,
+            timestamp: serverTimestamp()
+        });
+
+        alert("Your appointment has been successfully booked!");
+
+        // Redirect to the payment page
+        switch (paymentMode) {
+            case "Net Banking":
+                window.location.href = "https://www.example.com/net-banking-payment";
+                break;
+            case "Credit Card":
+                window.location.href = "https://www.example.com/credit-card-payment";
+                break;
+            case "Debit Card":
+                window.location.href = "https://www.example.com/debit-card-payment";
+                break;
+            case "UPI":
+                window.location.href = "https://www.example.com/upi-payment";
+                break;
         }
-    });
+    } catch (error) {
+        console.error("Error adding document: ", error);
+        alert("There was an issue with booking your appointment.");
+    }
+});
 
 
 
@@ -214,54 +227,73 @@
         <!-- Fabric Selection -->
         <div class="form-section">
             <h3>Select Fabrics</h3>
-            <select id="fabric" name="fabric" required>
-                <option value="">Select a fabric</option>
-                <option value="Coat Pant">Coat Pant</option>
-                <option value="Shirt Pant">Shirt Pant</option>
-                <option value="Kurta Pajama">Kurta Pajama</option>
-                <option value="3 Piece Suit">3 Piece Suit</option>
-            </select>
+            <label for="clothingOptions">Select an Option:</label>
+  <select id="clothingOptions" name="clothingOptions">
+    <!-- Coat-Pant Options -->
+    <optgroup label="Coat-Pant">
+      <option value="coatPant1">Coat-Pant Image 1</option>
+      <option value="coatPant2">Coat-Pant Image 2</option>
+      <option value="coatPant3">Coat-Pant Image 3</option>
+    </optgroup>
+    
+    <!-- Kurta-Pajama Options -->
+    <optgroup label="Kurta-Pajama">
+      <option value="kurtaPajama1">Kurta-Pajama Image 1</option>
+      <option value="kurtaPajama2">Kurta-Pajama Image 2</option>
+      <option value="kurtaPajama3">Kurta-Pajama Image 3</option>
+    </optgroup>
+    
+    <!-- 3-Piece Suit Options -->
+    <optgroup label="3-Piece Suit">
+      <option value="threePiece1">3-Piece Image 1</option>
+      <option value="threePiece2">3-Piece Image 2</option>
+      <option value="threePiece3">3-Piece Image 3</option>
+    </optgroup>
+    
+    <!-- Pant-Shirt Options -->
+    <optgroup label="Pant-Shirt">
+      <option value="pant1-shirt1">Pant1 - Shirt1</option>
+      <option value="pant1-shirt2">Pant1 - Shirt2</option>
+      <option value="pant1-shirt3">Pant1 - Shirt3</option>
+      <option value="pant1-shirt4">Pant1 - Shirt4</option>
+      <option value="pant1-shirt5">Pant1 - Shirt5</option>
+      <option value="pant2-shirt1">Pant2 - Shirt1</option>
+      <option value="pant2-shirt2">Pant2 - Shirt2</option>
+      <!-- Add more combinations as needed -->
+    </optgroup>
+  </select>
         </div>
 
         
-        <!--Visiting date-->
 <label for="date">Pick Home Visit Date:</label>
 <select id="date" name="date" required>
     <option value="">Select a date</option>
 </select>
 
+
 <script>
-    // Populate the date dropdown with the next 15 days
-    function populateDateDropdown() {
-        const dateDropdown = document.getElementById('date');
-        const today = new Date();
+    // Function to populate the date dropdown with the next 7 days
+function populateDateOptions() {
+    const dateSelect = document.getElementById('date');
+    const currentDate = new Date();
 
-        for (let i = 0; i < 15; i++) {
-            const futureDate = new Date(today);
-            futureDate.setDate(today.getDate() + i);
+    // Loop to create the next 7 days of options
+    for (let i = 0; i < 7; i++) {
+        const newDate = new Date(currentDate);
+        newDate.setDate(currentDate.getDate() + i); // Add i days to the current date
 
-            const yyyy = futureDate.getFullYear();
-            const mm = String(futureDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-            const dd = String(futureDate.getDate()).padStart(2, '0');
+        const option = document.createElement('option');
+        option.value = newDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+        option.textContent = newDate.toLocaleDateString(); // Format as readable date
 
-            const dateValue = `${yyyy}-${mm}-${dd}`;
-            const displayDate = futureDate.toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-            });
-
-            const option = document.createElement('option');
-            option.value = dateValue;
-            option.textContent = displayDate;
-
-            dateDropdown.appendChild(option);
-        }
+        dateSelect.appendChild(option); // Add option to the select element
     }
+}
 
-    // Call the function to populate the dropdown
-    populateDateDropdown();
+// Call the function to populate date options
+populateDateOptions();
+
+
 </script>
 
 
@@ -321,6 +353,21 @@
             });
         }
     });
+
+const pantShirtDropdown = document.querySelector('#clothingOptions optgroup[label="Pant-Shirt"]');
+const pants = 5;
+const shirts = 7;
+
+for (let i = 1; i <= pants; i++) {
+  for (let j = 1; j <= shirts; j++) {
+    const option = document.createElement('option');
+    option.value = `pant${i}-shirt${j}`;
+    option.textContent = `Pant${i} - Shirt${j}`;
+    pantShirtDropdown.appendChild(option);
+  }
+}
+
+
 </script>
 
 </body>
