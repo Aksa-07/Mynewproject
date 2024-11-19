@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Only Stitching</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+     /* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* Main Container */
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Page Title Styling */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #333;
+    position: relative;
+    display: inline-block;
+}
+
+/* Line Below the Heading */
+h1::before,
+h1::after {
+    content: "";
+    display: inline-block;
+    width: 70px;
+    height: 2px;
+    background: #000;
+    position: absolute;
+    bottom: 4px; /* Adjusted to move the line below the heading */
+}
+
+h1::before {
+    left: -90px; /* Adjust for left side line */
+}
+
+h1::after {
+    right: -90px; /* Adjust for right side line */
+}
+
+/* Card Styling */
+.card {
+    background: white;
+    margin: 15px auto;
+    padding: 25px 20px;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Title */
+.card h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #444;
+}
+
+/* Price Styling */
+.card p {
+    font-size: 1.4rem;
+    color: #e60000;
+    font-weight: bold;
+    margin: 15px 0 0;
+}
+
+/* WhatsApp Icon */
+.whatsapp-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    transition: transform 0.3s;
+}
+
+.whatsapp-icon img {
+    width: 100%;
+    height: auto;
+}
+
+.whatsapp-icon:hover {
+    transform: scale(1.2);
+}
+
+
+  </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Only Stitching</h1>
+        <div class="card">
+            <h2>Shirts</h2>
+            <p>999₹</p>
+        </div>
+        <div class="card">
+            <h2>Pants</h2>
+            <p>1199₹</p>
+        </div>
+        <div class="card">
+            <h2>Blazer</h2>
+            <p>3299₹</p>
+        </div>
+        <div class="card">
+            <h2>3-Piece Suit</h2>
+            <p>4599₹</p>
+        </div>
+        <div class="card">
+            <h2>Coat Pant</h2>
+            <p>4999₹</p>
+        </div>
+        <a href="https://wa.me/yourphonenumber" class="whatsapp-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+        </a>
+    </div>
+</body>
+</html>

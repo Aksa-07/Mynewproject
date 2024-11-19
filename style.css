@@ -18,7 +18,6 @@
   width: 100%;
   padding:0;
   animation: gradient-animation 18s ease infinite;
-  margin-bottom:0;
 }
 
  @keyframes gradient-animation {
@@ -33,50 +32,132 @@
   }
 } 
 
-/* Custom heading and paragraph */
-/* .custom-heading, .custom-paragraph {
-  color: whitesmoke;
-} */
 
-/* External CSS for navigation links */
-.nav-link {
-  color: black; /* Default text color */
-  text-decoration: none; /* Remove underline */
-  padding: 0 1rem; /* Consistent padding */
-  font-size: 1.3rem; /* Consistent text size */
-  display: inline-block; /* Ensure padding is applied properly */
-  text-align: center; /* Center text alignment */
-}
-
-.nav-link:hover {
-  color: #c563ff; /* Color on hover */
-}
-
-/* Ensure the list items are displayed horizontally and aligned */
+/* Styling the navigation bar */
 .nav {
-  list-style-type: none; /* Remove default list bullets */
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
-  display: flex; /* Display list items in a row */
-  justify-content: center; /* Center items horizontally */
-  align-items: center; /* Vertically align items in the center */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Additional margin to push links to the right of the icon */
-.nav li:first-child {
-  margin-right: 2rem; /* Adjust the margin to push the links further right */
-}
-
-.nav li {
-  margin: 0 0.15rem; /* Add horizontal margin between items */
-  display: flex; /* Ensure the list item is a flex container */
-  align-items: center; /* Center the content vertically within the list item */
-}
-
+/* Style for each nav item */
 .nav-item {
-  display: flex; /* Make sure the image container aligns properly */
-  align-items: center; /* Center the content vertically */
+  margin: 0 15px;
 }
+
+/* Style for links in the navbar */
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px 15px;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 5px;
+}
+
+/* Hover effect for nav items */
+.nav-link:hover {
+  color: #b3a1e6;
+}
+
+/* Styling the dropdown menu */
+.nav-item.dropdown .dropdown-menu {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Show dropdown when hovered */
+.nav-item.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Styling for dropdown items */
+.dropdown-item {
+  color: #333;
+  padding: 10px 15px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover effect for dropdown items */
+.dropdown-item:hover {
+  background-color: #b3a1e6;
+  color: white;
+}
+
+/* Logo styling */
+.nav-item img {
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for logo */
+.nav-item img:hover {
+  transform: scale(1.1);
+}
+
+/* Search input styling */
+.form-control {
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+  transition: border-color 0.3s ease;
+}
+
+/* Search input focus effect */
+.form-control:focus {
+  border-color: #b3a1e6;
+  box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+}
+
+/* Login & Sign-up buttons */
+.btn-login, .btn-signup {
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+  border: none;
+}
+
+/* Hover effect for buttons */
+.btn-login:hover, .btn-signup:hover {
+  background-color: #b3a1e6;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Style for the container of buttons */
+.text-end {
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive design for small screens */
+@media (max-width: 768px) {
+  .nav {
+      flex-direction: column;
+  }
+  
+  .nav-item {
+      margin: 10px 0;
+  }
+  
+  .text-end {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+}
+
 
 /* Common styles for all buttons */
 .btn {
