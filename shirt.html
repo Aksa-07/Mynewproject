@@ -3,61 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pant-Shirt</title>
+  <title>Shirt-Pant</title>
   <style>
-  body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      position: relative; /* To position the button correctly */
-    }
-
-    .done-button {
-      position: absolute;
-      bottom: 5px; /* Position from bottom */
-      right: 20px; /* Position from right */
-      background-color: #6AB187; /* Green background */
-      color: white; /* White text */
-      border: none;
-      padding: 15px 30px;
-      font-size: 18px;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-      outline: none;
-    }
-
-    .done-button:hover {
-      background-color: #4f8c5b; /* Darker green when hovered */
-      transform: scale(1.05); /* Slight zoom effect */
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
-    }
-
-    .done-button:active {
-      background-color: #3d693f; /* Even darker when clicked */
-      transform: scale(1.03); /* Slightly smaller when clicked */
-    }
-
-    .done-button:focus {
-      outline: none;
-    }
-
-    .done-button span {
-      margin-left: 10px;
-    }
-
-
-
     body {
       font-family: Arial, sans-serif;
       background-color: #f4f4f9;
-      color: #333;
       margin: 0;
       padding: 0;
     }
@@ -76,27 +26,28 @@
     }
 
     .slider-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-    }
+  display: flex;
+  justify-content: space-between;
+  margin: 40px auto;
+  width: 80%;
+  max-width: 1000px;
+}
 
-    .slider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      width: 60%;
-      overflow: hidden;
-      margin: 20px 0;
-    }
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 50%; /* Make both sliders 50% of the container width */
+  overflow: hidden;
+  box-sizing: border-box; /* Ensures padding and border are included in width calculation */
+}
+
 
     .slider .slide {
       display: none;
       width: 100%;
       text-align: center;
-      border: 1px solid #ddd;
       border-radius: 8px;
       padding: 15px;
       background-color: #ffffff;
@@ -108,29 +59,24 @@
     }
 
     .slide img {
-      width: 80%;
-      height: auto;
-      max-height: 180px;
+      width: 100%;
+      height: 300px; /* Set a consistent height */
+      object-fit: cover; /* Ensures the image fills the area while maintaining proportions */
       border-radius: 8px;
       transition: transform 0.3s ease;
     }
 
-    .slide p {
-      margin: 10px 0;
+    .fabric-label {
+      margin-top: 10px;
       font-size: 18px;
+      font-weight: bold;
       color: #333;
-    }
-
-    .fabric-details {
-      font-size: 14px;
-      color: #555;
-      margin: 8px 0;
-      line-height: 1.5;
     }
 
     .price-tag {
       font-weight: bold;
       color: #0066cc;
+      margin: 10px 0;
     }
 
     .select-btn {
@@ -154,141 +100,136 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 30px;
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
+      font-size: 24px;
+      background-color: #ffffff;
+      border: 2px solid #6AB187;
+      color: #6AB187;
       padding: 10px;
-      cursor: pointer;
       border-radius: 50%;
+      cursor: pointer;
       z-index: 1;
+      transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    }
+
+    .arrow:hover {
+      background-color: #6AB187;
+      color: white;
+      transform: scale(1.1);
     }
 
     .arrow.left {
-      left: -25px;
+      left: 20px;
     }
 
     .arrow.right {
-      right: -25px;
+      right: 20px;
     }
   </style>
 </head>
 <body>
 
   <div class="selection-section">
-    <h2>Pant-Shirt</h2>
+    <h2>Shirt-Pant</h2>
   </div>
 
-  <!-- Pant Fabric Slider -->
   <div class="slider-container">
-    <h3>Pant Fabric</h3>
+    <!-- Coat Slider -->
     <div class="slider">
-      <div class="arrow left" onclick="prevSlide('pant')">&#10094;</div>
-      <div id="pantFabricGallery" class="slides">
-        <!-- Pant fabric options will be displayed here -->
+      <button class="arrow left" onclick="prevSlide('coat')">&#10094;</button>
+      <div id="coatGallery" class="slides">
+        <!-- Coat fabrics will be dynamically added here -->
       </div>
-      <div class="arrow right" onclick="nextSlide('pant')">&#10095;</div>
+      <button class="arrow right" onclick="nextSlide('coat')">&#10095;</button>
+    </div>
+
+    <!-- Pant Slider -->
+    <div class="slider">
+      <button class="arrow left" onclick="prevSlide('pant')">&#10094;</button>
+      <div id="pantGallery" class="slides">
+        <!-- Pant fabrics will be dynamically added here -->
+      </div>
+      <button class="arrow right" onclick="nextSlide('pant')">&#10095;</button>
     </div>
   </div>
-
-  <!-- Shirt Fabric Slider -->
-  <div class="slider-container">
-    <h3>Shirt Fabric</h3>
-    <div class="slider">
-      <div class="arrow left" onclick="prevSlide('shirt')">&#10094;</div>
-      <div id="shirtFabricGallery" class="slides">
-        <!-- Shirt fabric options will be displayed here -->
-      </div>
-      <div class="arrow right" onclick="nextSlide('shirt')">&#10095;</div>
-    </div>
-  </div>
-
-  <button class="done-button">
-    Done
-    <span>&#10003;</span> <!-- Checkmark icon -->
-  </button>
 
   <script>
     const fabricOptions = {
-      pant: [
-        { name: "Elegant Wool", img: "fabric-images/pant-1.jpg", price: "$120", type: "Wool", description: "High-quality wool perfect for formal coats." },
-        { name: "Premium Cotton", img: "fabric-images/pant-2.jpg", price: "$90", type: "Cotton", description: "Soft and breathable cotton fabric for comfort." },
-        { name: "Classic Tweed", img: "fabric-images/pant-3.jpg", price: "$150", type: "Tweed", description: "Traditional tweed ideal for a stylish look." },
-        { name: "Classic Tweed", img: "fabric-images/pant-4.jpg", price: "$150", type: "Tweed", description: "Traditional tweed ideal for a stylish look." },
-        { name: "Classic Tweed", img: "fabric-images/pant-5.jpg", price: "$150", type: "Tweed", description: "Traditional tweed ideal for a stylish look." },
-        { name: "Classic Tweed", img: "fabric-images/pant-6.jpg", price: "$150", type: "Tweed", description: "Traditional tweed ideal for a stylish look." }
+      coat: [
+        { name: "Shirt Img-1", img: "fabric_images/shirt-1.jpg", price: "₹9,999" },
+        { name: "Shirt Img-2", img: "fabric_images/shirt-2.jpg", price: "₹7,499" },
+        { name: "Shirt Img-3", img: "fabric_images/shirt-3.jpg", price: "₹12,499" },
+        { name: "Shirt Img-4", img: "fabric_images/shirt-4.jpg", price: "₹14,299" },
+        { name: "Shirt Img-5", img: "fabric_images/shirt-5.jpg", price: "₹8,699" },
       ],
-      shirt: [
-        { name: "Linen Blend", img: "fabric-images/shirt-1.jpg", price: "$80", type: "Linen", description: "Lightweight linen blend for a casual shirt." },
-        { name: "Soft Cotton", img: "fabric-images/shirt-2.jpg", price: "$70", type: "Cotton", description: "Smooth cotton with a soft texture for comfort." },
-        { name: "Silk Mix", img: "fabric-images/shirt-3.jpg", price: "$110", type: "Silk", description: "Elegant silk mix, perfect for formal occasions." },
-        { name: "Silk Mix", img: "fabric-images/shirt-4.jpg", price: "$110", type: "Silk", description: "Elegant silk mix, perfect for formal occasions." },
-        { name: "Silk Mix", img: "fabric-images/shirt-5.jpg", price: "$110", type: "Silk", description: "Elegant silk mix, perfect for formal occasions." },
-        { name: "Silk Mix", img: "fabric-images/shirt-6.jpg", price: "$110", type: "Silk", description: "Elegant silk mix, perfect for formal occasions." },
-        { name: "Silk Mix", img: "fabric-images/shirt-7.jpg", price: "$110", type: "Silk", description: "Elegant silk mix, perfect for formal occasions." },
-        { name: "Silk Mix", img: "fabric-images/shirt-8.jpg", price: "$110", type: "Silk", description: "Elegant silk mix, perfect for formal occasions." }
+      pant: [
+        { name: "Pant Img-1", img: "fabric_images/pant-1.jpg", price: "₹2,999" },
+        { name: "Pant Img-2", img: "fabric_images/pant-2.jpg", price: "₹3,499" },
+        { name: "Pant Img-3", img: "fabric_images/pant-3.jpg", price: "₹4,199" },
+        { name: "Pant Img-4", img: "fabric_images/pant-4.jpg", price: "₹5,499" },
+        { name: "Pant Img-5", img: "fabric_images/pant-5.jpg", price: "₹3,199" },
+        { name: "Pant Img-6", img: "fabric_images/pant-6.jpg", price: "₹2,199" },
       ]
     };
 
-    let currentPantSlide = 0;
-    let currentShirtSlide = 0;
+    let currentSlide = { coat: 0, pant: 0 };
 
-    function updateFabricGallery(type) {
-      const galleryId = type === 'pant' ? 'pantFabricGallery' : 'shirtFabricGallery';
-      const gallery = document.getElementById(galleryId);
-      gallery.innerHTML = ""; // Clear existing options
-
-      fabricOptions[type].forEach((fabric, index) => {
+    function updateFabricGallery() {
+      // Update Coat Gallery
+      const coatGallery = document.getElementById("coatGallery");
+      coatGallery.innerHTML = "";
+      fabricOptions.coat.forEach((fabric, index) => {
         const fabricItem = document.createElement("div");
         fabricItem.classList.add("slide");
         if (index === 0) fabricItem.classList.add("active");
 
         fabricItem.innerHTML = `
           <img src="${fabric.img}" alt="${fabric.name}">
-          <p>${fabric.name}</p>
-          <div class="fabric-details">
-            <p><strong>Type:</strong> ${fabric.type}</p>
-            <p><strong>Description:</strong> ${fabric.description}</p>
-            <p class="price-tag"><strong>Price:</strong> ${fabric.price}</p>
-          </div>
+          <p class="fabric-label">${fabric.name}</p>
+          <p class="price-tag"><strong>Price:</strong> ${fabric.price}</p>
           <button class="select-btn">Select</button>
         `;
+        coatGallery.appendChild(fabricItem);
+      });
 
-        gallery.appendChild(fabricItem);
+      // Update Pant Gallery
+      const pantGallery = document.getElementById("pantGallery");
+      pantGallery.innerHTML = "";
+      fabricOptions.pant.forEach((fabric, index) => {
+        const fabricItem = document.createElement("div");
+        fabricItem.classList.add("slide");
+        if (index === 0) fabricItem.classList.add("active");
+
+        fabricItem.innerHTML = `
+          <img src="${fabric.img}" alt="${fabric.name}">
+          <p class="fabric-label">${fabric.name}</p>
+          <p class="price-tag"><strong>Price:</strong> ${fabric.price}</p>
+          <button class="select-btn">Select</button>
+        `;
+        pantGallery.appendChild(fabricItem);
       });
     }
 
     function showSlide(type, index) {
-      const slides = document.querySelectorAll(`#${type}FabricGallery .slide`);
+      const slides = document.querySelectorAll(`#${type}Gallery .slide`);
       slides.forEach((slide, i) => {
         slide.classList.toggle("active", i === index);
       });
     }
 
     function nextSlide(type) {
-      const slides = document.querySelectorAll(`#${type}FabricGallery .slide`);
-      if (type === 'pant') {
-        currentPantSlide = (currentPantSlide + 1) % slides.length;
-        showSlide('pant', currentPantSlide);
-      } else {
-        currentShirtSlide = (currentShirtSlide + 1) % slides.length;
-        showSlide('shirt', currentShirtSlide);
-      }
+      const slides = document.querySelectorAll(`#${type}Gallery .slide`);
+      currentSlide[type] = (currentSlide[type] + 1) % slides.length;
+      showSlide(type, currentSlide[type]);
     }
 
     function prevSlide(type) {
-      const slides = document.querySelectorAll(`#${type}FabricGallery .slide`);
-      if (type === 'pant') {
-        currentPantSlide = (currentPantSlide - 1 + slides.length) % slides.length;
-        showSlide('pant', currentPantSlide);
-      } else {
-        currentShirtSlide = (currentShirtSlide - 1 + slides.length) % slides.length;
-        showSlide('shirt', currentShirtSlide);
-      }
+      const slides = document.querySelectorAll(`#${type}Gallery .slide`);
+      currentSlide[type] = (currentSlide[type] - 1 + slides.length) % slides.length;
+      showSlide(type, currentSlide[type]);
     }
 
-    // Initialize both fabric galleries
-    updateFabricGallery('pant');
-    updateFabricGallery('shirt');
+    // Initialize gallery with default selection
+    updateFabricGallery();
   </script>
 
 </body>
