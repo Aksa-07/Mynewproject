@@ -69,114 +69,86 @@
 
      
 
-          <!-- Your existing content -->
-
-    <!-- Login Button -->
-    <!--<button type="button" class="btn btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>-->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="loginModalLabel">Login</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="Login">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username (Email)</label>
+            <input type="email" class="form-control" id="login-email" placeholder="Enter your email" required>
           </div>
-          <div class="modal-body">
-            <form onsubmit="login(event)">
-              <div class="mb-3">
-                <label for="username" class="form-label">Username (Email)</label>
-                <input type="email" class="form-control" id="username" placeholder="Enter your email" required>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="login-password" placeholder="Enter your password" required>
-              </div>
-
-            
-
-
-              <button type="submit" class="btn btn-primary" id="Login">Login</button>
-            </form>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="login-password" placeholder="Enter your password" required>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
+          <button type="submit" class="btn btn-primary" id="loginButton">Login</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
-    
-    <!-- Firebase and Bootstrap Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-   <!-- Firebase Configuration -->
-<script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
-<script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
-<script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
-
-    <script type="module" src="OnlineTailor.js"></script>
-    
-
-<!-- Existing HTML content -->
-
-<!-- Sign-up Modal -->
-<div id="toast" style="position: fixed; top: 20px; right: 20px; z-index: 1050;"></div>
-<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <form action="" id="Signup">
-                  <div class="mb-3">
-                      <label for="name" class="form-label">User Name</label>
-                      <input type="text" class="form-control" id="name"  autocomplete="off" required>
-                      <span id="nameid" class="error-message"></span>
-                  </div>
-                  <div class="mb-3">
-                      <label for="email" class="form-label">Email Address</label>
-                      <input type="email" class="form-control" id="email" autocomplete="off" required>
-                      <span id="emailid" class="error-message"></span>
-                  </div>
-                  <div class="mb-3">
-                      <label for="phone" class="form-label">Phone Number</label>
-                      <input type="tel"  class="form-control" id="phone" autocomplete="off">
-                      <span id="phoneid" class="error-message"></span>
-                  </div>
-                  
-                  <div class="mb-3">
-                      <label for="password" class="form-label">Password</label>
-                      <input type="password"  class="form-control" id="signup-password" autocomplete="off">
-                      <span id="signup-password-id" class="error-message"></span>
-                  </div>
-                  <div class="mb-3">
-                      <label for="confirm-password" class="form-label">Confirm Password</label>
-                      <input type="password" class="form-control" id="signupconfirm-password" autocomplete="off">
-                      <span id="signupconfirm-password-id" class="error-message"></span>
-                      
-                  </div>
-                  <button type="submit" class="btn btn-primary w-100" id="signupButton" >Sign Up</button>
-              </form>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-      </div>
   </div>
 </div>
 
-<!-- Existing HTML content -->
+<!-- Sign-Up Modal -->
+<div id="toast" style="position: fixed; top: 20px; right: 20px; z-index: 1050;"></div>
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="Signup">
+          <div class="mb-3">
+            <label for="name" class="form-label">User Name</label>
+            <input type="text" class="form-control" id="name" autocomplete="off" required>
+            <span id="nameid" class="error-message"></span>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" autocomplete="off" required>
+            <span id="emailid" class="error-message"></span>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="phone" autocomplete="off">
+            <span id="phoneid" class="error-message"></span>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="signup-password" autocomplete="off">
+            <span id="signup-password-id" class="error-message"></span>
+          </div>
+          <div class="mb-3">
+            <label for="confirm-password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="signupconfirm-password" autocomplete="off">
+            <span id="signupconfirm-password-id" class="error-message"></span>
+          </div>
+          <button type="submit" class="btn btn-primary w-100" id="signupButton">Sign Up</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- Bootstrap JavaScript Bundle -->
- 
+<!-- Firebase and Bootstrap Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<!-- Firebase Configuration -->
 <script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
 <script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"></script>
 <script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
-<script type="module" src="OnlineTailor.js" ></script>
-<script type="module" src="firestoreUtils.js" ></script>
-    
+<script type="module" src="OnlineTailor.js"></script>
 
 
 
