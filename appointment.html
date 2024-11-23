@@ -9,6 +9,8 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script src="https://cdn.rawgit.com/neocotic/qrious/master/dist/qrious.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script> <!-- QR Code Library -->
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -112,6 +114,20 @@
         }
     }
 
+   // Generate QR code function
+function generateQRCode(data) {
+    console.log("Generating QR code with data:", data); // Debugging: Check data
+    try {
+        const qr = new QRious({
+            element: document.getElementById('qrCode'), // Target canvas element for QR code
+            value: data, // Data to encode in QR code
+            size: 200 // QR code size in pixels
+        });
+        console.log("QR code generated successfully!"); // Debugging: Success message
+    } catch (error) {
+        console.error("Error generating QR code:", error); // Debugging: Error message
+    }
+}
 
     document.getElementById('bookingForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent default form submission
@@ -125,8 +141,8 @@
     const paymentMode = document.getElementById('paymentMode').value.trim();
     const houseNo = document.getElementById('houseNo').value.trim();
     const landmark = document.getElementById('landmark').value.trim();
-    const latitude = parseFloat(document.getElementById('latitude').value);
-    const longitude = parseFloat(document.getElementById('longitude').value);
+    const latitude = document.getElementById("latitude").value.trim();
+    const longitude = document.getElementById("longitude").value.trim();
 
     // Check for missing fields
     if (!name || !mobile || !email || !fabric || !date || !paymentMode || !houseNo || !landmark || isNaN(latitude) || isNaN(longitude)) {
@@ -156,21 +172,25 @@
 
         alert("Your appointment has been successfully booked!");
 
-        // Redirect to the payment page
-        switch (paymentMode) {
-            case "Net Banking":
-                window.location.href = "https://www.example.com/net-banking-payment";
-                break;
-            case "Credit Card":
-                window.location.href = "https://www.example.com/credit-card-payment";
-                break;
-            case "Debit Card":
-                window.location.href = "https://www.example.com/debit-card-payment";
-                break;
-            case "UPI":
-                window.location.href = "https://www.example.com/upi-payment";
-                break;
-        }
+        // UPI data for 400 rupees payment
+        const upiID = ""; // Replace with your actual UPI ID
+        const amount = 400;
+        const upiRecipientName = "Online Tailor"; // Changed to avoid name conflict
+
+        // UPI QR code format
+        const qrData = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(upiRecipientName)}&am=${amount}&cu=INR`;
+
+       // Call the function to generate QR code
+
+       // Debugging: Check if qrData is correct
+console.log("QR Code data generated:", qrData);
+        generateQRCode(qrData);
+
+        setTimeout(function() {
+                    window.location.href = "nextpage.html"; // Replace with your next page URL
+                }, 2000); // Redirect after 2 seconds (for a smoother experience)
+
+   
     } catch (error) {
         console.error("Error adding document: ", error);
         alert("There was an issue with booking your appointment.");
@@ -188,7 +208,7 @@
 <div class="form-container">
     <h2>Book an Appointment</h2>
     <form id="bookingForm">
-            <!-- User Details -->
+     <!-- User Details -->
             <div class="form-section">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
@@ -355,7 +375,7 @@ populateDateOptions();
             <p>This is the charge for the tailor to visit your home for taking measurements.</p>
         </div>
 
-        <button type="submit">Submit Booking</button>
+        <button type="submit" onclick="handleBooking()">Submit Booking</button>
     </form>
 </div>
 
@@ -378,19 +398,46 @@ populateDateOptions();
         document.getElementById('longitude').value = lon;
     });
 
-    // Reset to current location
     document.getElementById('resetLocationBtn').addEventListener('click', function() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var lat = position.coords.latitude;
-                var lon = position.coords.longitude;
-                map.setView([lat, lon], 13);
-                marker.setLatLng([lat, lon]);
-                document.getElementById('latitude').value = lat;
-                document.getElementById('longitude').value = lon;
-            });
+    // Use the browser's geolocation API to reset to current location
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            // Update the map
+            map.setView([lat, lon], 13); // Adjust zoom level as necessary
+            marker.setLatLng([lat, lon]); // Move marker to new location
+
+            // Set the input fields with the new coordinates
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lon;
+
+           // Define getAddressFromCoordinates function
+function getAddressFromCoordinates(latitude, longitude) {
+    const geocoder = new google.maps.Geocoder();
+    const latLng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+
+    geocoder.geocode({ location: latLng }, (results, status) => {
+        if (status === "OK" && results[0]) {
+            const address = results[0].formatted_address;
+            console.log("Address:", address);
+            // Do something with the address, e.g., update the form field
+            document.getElementById("address").value = address;
+        } else {
+            alert("Geocode failed: " + status);
         }
     });
+}
+
+        }, function(error) {
+            alert('Unable to retrieve your location. Please try again.');
+        });
+    } else {
+        alert('Geolocation is not supported by this browser.');
+    }
+});
+
 
 const pantShirtDropdown = document.querySelector('#clothingOptions optgroup[label="Pant-Shirt"]');
 const pants = 6;

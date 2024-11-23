@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment QR Code</title>
+    <script src="https://cdn.rawgit.com/neocotic/qrious/master/dist/qrious.min.js"></script>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        /* Header Styling */
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Canvas Styling */
+        canvas {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        /* QR Code Container */
+        .qr-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button Styling */
+        .success-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 30px;
+            display: none; /* Initially hidden */
+        }
+
+        .success-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Payment Confirmation Section */
+        .payment-success {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #28a745;
+            display: none; /* Initially hidden */
+        }
+    </style>
+    <script>
+        // Function to generate QR code for UPI payment
+        function generateQRCode(data) {
+            const qr = new QRious({
+                element: document.getElementById('qrCode'), // Target canvas element for QR code
+                value: data, // Data to encode in QR code
+                size: 250 // QR code size in pixels
+            });
+        }
+
+        // When the page loads, generate the QR code
+        window.onload = function() {
+            // UPI data for 400 rupees payment
+            const upiID = "faridakhatoon@bob"; // Replace with your actual UPI ID
+            const amount = 400;
+            const upiRecipientName = "Online Tailor"; // Replace with the actual recipient name
+
+            // UPI QR code format
+            const qrData = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(upiRecipientName)}&am=${amount}&cu=INR`;
+
+            // Debugging: Check if qrData is correct
+            console.log("QR Code data generated:", qrData);
+
+            // Call the function to generate QR code
+            generateQRCode(qrData);
+        };
+
+        // Simulate payment success and show thank you message
+        function paymentSuccess() {
+            document.getElementById('payment-success').style.display = 'block'; // Show success message
+            document.getElementById('success-btn').style.display = 'block'; // Show success button
+        }
+    </script>
+</head>
+<body>
+    <h1>Scan and Pay ₹400 for Measurement Charges</h1>
+    <div class="qr-container">
+        <canvas id="qrCode"></canvas>
+    </div>
+
+    <!-- Payment Success Message -->
+    <div id="payment-success" class="payment-success">
+        <p>Thank you for your payment! Your booking is confirmed.</p>
+    </div>
+
+    <!-- Button to simulate payment success -->
+    <button id="success-btn" class="success-btn" onclick="paymentSuccess()">Payment Successful</button>
+
+    <script>
+        // Simulate payment success after 5 seconds (just for demo purpose)
+        setTimeout(paymentSuccess, 5000); // Automatically show success after 5 seconds
+    </script>
+</body>
+</html>
