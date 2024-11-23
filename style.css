@@ -814,11 +814,6 @@ details p {
 }
 
 
-.custom-image {
-  height: 20vh; /* 20% of viewport height */
-  width: 100%; /* Full width */
-  object-fit: cover; /* Maintains aspect ratio and crops if necessary */
-}
 
 
 
