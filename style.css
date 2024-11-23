@@ -719,7 +719,65 @@ h2 {
 
 
 
+/*    F A Q      */
 
+
+.faq-section {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.faq-list details {
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+}
+
+summary {
+  cursor: pointer;
+  padding: 1rem;
+  font-weight: bold;
+  color: hsl(256, 90%, 40%);
+}
+
+details p {
+  padding: 1rem;
+  margin: 0;
+  border-top: 1px solid #ddd;
+  color: #333;
+}
+
+.read-more-btn {
+  background-color: hwb(214 6% 16%);
+  color: hwb(220 95% 4%);
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+}
+
+.read-more-btn:hover {
+  background-color: #c12639;
+}
 
 
 
