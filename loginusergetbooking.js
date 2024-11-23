@@ -42,3 +42,27 @@ onAuthStateChanged(auth, (user) => {
     console.log("No user logged in.");
   }
 });
+
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        console.log("User is logged in:", user.email);
+
+        // Add custom logic for session timeout
+        const loginTime = new Date().getTime(); // Get login time in milliseconds
+        const sessionDuration = 2 * 60 * 60 * 1000; // Set session duration (e.g., 2 hours)
+
+        setTimeout(() => {
+            // Automatically sign out the user after session duration
+            signOut(auth).then(() => {
+                console.log("Session expired. User logged out.");
+                alert("Your session has expired. Please log in again.");
+            }).catch((error) => {
+                console.error("Error signing out:", error);
+            });
+        }, sessionDuration);
+    } else {
+        console.log("No user is logged in.");
+    }
+});
+
