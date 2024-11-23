@@ -716,6 +716,102 @@ h2 {
 }
 
 
+/*    F A Q      */
+
+h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem); /* Adjusts between 1.5rem and 2rem based on screen width */
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5; /* Improves readability */
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.faq-list details {
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  overflow: hidden; /* Prevent overflowing content */
+}
+
+summary {
+  cursor: pointer;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1rem; /* Scales for small screens */
+  color: hsl(256, 90%, 40%);
+}
+
+details p {
+  padding: 1rem;
+  margin: 0;
+  border-top: 1px solid #ddd;
+  color: #333;
+  font-size: 0.9rem; /* Slightly smaller for mobile */
+}
+
+.read-more-btn {
+  background-color: hwb(214 6% 16%);
+  color: hwb(220 95% 4%);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem; /* Add bottom spacing to separate from footer */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.read-more-btn:hover {
+  background-color: #c12639;
+  transform: scale(1.05); /* Slightly enlarges button */
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 95%; /* Container narrows down */
+    padding: 1rem; /* Reduced padding */
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .read-more-btn {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  summary {
+    font-size: 0.9rem;
+  }
+
+  details p {
+    font-size: 0.8rem;
+  }
+
+  .read-more-btn {
+    padding: 0.5rem 1rem;
+  }
+}
+
+
+.container {
+  width: 100%; /* Ensures it adjusts to smaller screens */
+  margin: auto; /* Center the container */
+  padding: 0 1rem; /* Add some padding for smaller screens */
+}
 
 
 
